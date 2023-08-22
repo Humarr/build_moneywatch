@@ -1,0 +1,123 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import asynckivy asynckivy
+# : import RoundImage widgets.img.RoundImage
+
+
+<ExpenseList2>
+    # md_bg_color: app.white
+    # elevation: 3
+    size_hint_y:.05
+    radius: [20]
+    text: root.amount
+    secondary_text: root.category + ": " + root.item
+    tertiary_text: root.date
+    font_style: "H6"
+    theme_text_color: "Custom"
+    text_color: app.warning
+    secondary_font_style: "Body1"
+    secondary_theme_text_color: "Custom"
+    secondary_text_color: app.text_color
+    tertiary_font_style: "Caption"
+    tertiary_theme_text_color: "Custom"
+    tertiary_text_color: app.text_color
+    # tertiary_text_color: app.warning
+    font_name: app.fonts.heading
+    _no_ripple_effect: True
+    # _font_size: "20sp"
+    # _height: "120dp"
+    IconLeftWidgetWithoutTouch:
+        icon: root.icon
+        theme_icon_color: "Custom"
+        icon_color: app.text_color
+
+
+
+<ExpensesScreen>
+    # md_bg_color: app.white
+    IconButton:
+        # id: percentag
+        icon:"arrow-left"
+        pos_hint: {'top': .99}
+        icon_color: app.text_color
+        # size_hint_x: .5
+        # font_name: app.fonts.heading
+        font_size:app.fonts.size.h5
+        on_press: app.change_screen("home")
+    MyTextField:
+        id: search
+        # text: ""
+        hint_text: "e.g Dec, 2023"
+        mode: "line"
+        active_line: True
+        line_color_focus: app.text_color
+        line_color_normal: app.text_color
+        text_color_focus: app.text_color
+        text_color_normal: app.text_color
+        hint_text_color_focus: app.text_color
+        hint_text_color_normal: app.text_color
+        size_hint_x:.5
+        pos_hint: {"center_x":.45, "center_y":.927}
+        # icon_right: "magnify"
+        input_type: "text"
+        on_text:
+            root.on_typing(self.text)
+            # root.search(self.text)
+    # IconButton:
+    #     icon: "magnify"
+    #     icon_color: app.text_color
+    #     # icon_color: app.primary
+    #     icon_size: app.fonts.size.icon
+    #     pos_hint: {"center_x":.8, "center_y":.94}
+    #     on_press: root.expenses_search_loader(search.text)
+
+    FlatButton:
+        text: "Search"
+        pos_hint: {'center_x': 0.63,'center_y': 0.945}
+        text_color:app.secondary
+        md_bg_color: app.white
+        size_hint_x: .15
+        font_size: app.fonts.size.h5
+        on_press: root.expenses_search_loader(search.text)
+
+    Text:
+        id: date_expense
+        text: ""
+        pos_hint: {"center_x":.55, "center_y":.85}
+        font_name: app.fonts.heading
+        text_color: app.text_color
+        font_size: app.fonts.size.h3
+    MDSpinner:
+        id: spinner
+        color: app.text_color
+        # palette:  [app.white, app.yellow, app.secondary]
+        determinate: False
+        size_hint: None, None
+        size: "200dp", "200dp"
+        active: False
+        line_width: "3dp"
+        pos_hint: {'center_x': .5, 'center_y': .5}
+    MDScrollView:
+        id: scroll_view
+        do_scroll_y: True
+        do_scroll_x: False
+        size_hint_y: .8
+        pos_hint: {'center_x': 0.5,'center_y':.41}
+        bar_width: 2
+        # md_bg_color: app.primary
+
+        # MDSelectionList:
+        #     size_hint_y: scroll_view.height
+            # padding: "24dp", 0, "24dp", "24dp"
+        GridLayout:
+            # md_bg_color: app.yellow
+            id: expense_container
+            cols: 1
+            height: self.minimum_height
+            row_default_height:'90dp'
+            size_hint_y: None
+            padding: '15dp','10dp'
+            spacing: '15dp','10dp'

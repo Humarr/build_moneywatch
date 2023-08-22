@@ -1,0 +1,87 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import asynckivy asynckivy
+# : import RoundImage widgets.img.RoundImage
+
+
+<SignupScreen>
+    Text:
+        text: "Create Account!"
+        font_size: app.fonts.size.h1
+        font_name: app.fonts.heading
+        pos_hint: {'x': 0.12,'center_y': 0.79}
+        text_color: app.secondary
+    MDFloatLayout:
+        md_bg_color: app.secondary
+        size_hint_y: .6
+        radius: [40,40,0,0]
+    MyTextField:
+        id: name
+        hint_text: "username"
+        pos_hint: {'center_x': 0.5,'center_y': 0.49}
+        icon_right: "account"
+    MyTextField:
+        id: email
+        hint_text: "email"
+        pos_hint: {'center_x': 0.5,'center_y': 0.39}
+        icon_right: "email"
+        input_type: "mail"
+    MyTextField:
+        id: password
+        hint_text: "password"
+        pos_hint: {'center_x': 0.5,'center_y': 0.29}
+        icon_right: "lock"
+        password: True
+    IconButton:
+        icon: "eye"
+        pos_hint: {'center_x': 0.78,'center_y': 0.29}
+        icon_color: app.secondary
+        on_press:
+            password.password = False if password.password is True else True
+            self.icon = "eye" if password.password == True else "eye-off"
+
+    RoundButton:
+        id: btn
+        text: "Proceed"
+        text_color:app.secondary
+        md_bg_color: app.white
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h3
+        size_hint_y: .07
+        pos_hint: {'center_x': 0.5,'center_y': 0.15}
+        on_press:
+            self.text = "Saving..."
+        on_release:
+            # root.signup_loader(name.text, email.text, password.text)
+            root.signup(name.text, email.text, password.text)
+
+    FlatButton:
+        text: "[u]Login instead[/u]"
+        pos_hint: {'center_x': 0.25,'center_y': 0.7}
+        text_color:app.white
+        font_size: app.fonts.size.h5
+        md_bg_color:app.secondary
+        on_press: app.change_screen("login")
+
+    Circle:
+        md_bg_color: app.orange
+        size: "110dp", "110dp"
+        pos_hint: {'center_x': 0.15,'center_y': 0.99}
+
+    Circle:
+        md_bg_color: app.primary
+        size: "130dp", "130dp"
+        pos_hint: {'center_x': 0.85,'center_y': 0.99}
+    Circle:
+        md_bg_color: app.secondary
+        size: "200dp", "200dp"
+        pos_hint: {'center_x': 0.5,'center_y': 0.99}
+    # MDIcon:
+    #     icon: "cash-multiple"
+    #     font_size: "100dp"
+    #     text_color: "yellow"
+    #     theme_text_color: "Custom"
+    #     pos_hint: {'center_x': 0.45,'center_y': 0.59}

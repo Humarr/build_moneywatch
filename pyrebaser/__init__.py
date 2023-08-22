@@ -1,0 +1,1 @@
+from .pyrebaser import initialize_app

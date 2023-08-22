@@ -1,0 +1,54 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import RoundButton widgets.button.RoundButton
+# : import RoundImage widgets.img.RoundImage
+
+<BudgetScreen>
+    Text:
+        text: "Set your Budget"
+        font_size: app.fonts.size.h3
+        font_name: app.fonts.heading
+        pos_hint: {'x': 0.192,'center_y': 0.79}
+        text_color: app.text_color
+    Text:
+        text: "Enter your estimated budget for this month expenses"
+        font_size: app.fonts.size.h5
+        font_name: app.fonts.heading
+        pos_hint: {'x':.07,'center_y': 0.69}
+        text_color: app.orange
+        size_hint_x: .9
+        halign: "center"
+        shorten: False
+    MDFloatLayout:
+        md_bg_color: app.secondary
+        size_hint_y: .6
+        radius: [40,40,0,0]
+
+    MyTextField:
+        id: budget
+        hint_text: "budget"
+        pos_hint: {'center_x': 0.5,'center_y': 0.49}
+        icon_right: "cash"
+        on_text: root.format(self.text)
+
+    RoundButton:
+        id: btn
+        text: "Save Budget"
+        text_color:app.secondary
+        md_bg_color: app.white
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h3
+        size_hint_y: .07
+        pos_hint: {'center_x': 0.5,'center_y': 0.35}
+        on_press: root.budget_loader(budget.text)
+    # IconButton:
+    #     icon: "arrow-left"
+    #     pos_hint: {'center_x': 0.101,'center_y': 0.94}
+    #     icon_color:app.secondary
+    #     icon_size: app.fonts.size.icon
+    #     # md_bg_color:app.secondary
+    #     on_press: app.change_screen("home")
+

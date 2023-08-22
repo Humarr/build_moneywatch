@@ -1,0 +1,149 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import MyInput widgets.field.MyInput
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import RoundButton widgets.button.RoundButton
+#: import asynckivy asynckivy
+# : import RoundImage widgets.img.RoundImage
+
+<OtpScreen>
+    # Text:
+    #     text: "Otp"
+    #     font_size: app.fonts.size.h1
+    #     font_name: app.fonts.heading
+    #     pos_hint: {'x': 0.192,'center_y': 0.79}
+    #     text_color: app.secondary
+    Text:
+        text: "A 4-digit code has been sent to your  email address."
+        font_size: app.fonts.size.h5
+        font_name: app.fonts.heading
+        pos_hint: {'x':.07,'center_y': 0.69}
+        text_color: app.orange
+        size_hint_x: .9
+        halign: "center"
+        shorten: False
+    MDFloatLayout:
+        md_bg_color: app.secondary
+        size_hint_y: .6
+        radius: [40,40,0,0]
+
+    MyInput:
+        id: first
+        pos_hint: {'center_x': 0.25,'center_y': 0.49}
+        # auto_focus: True
+        hint_text: "0"
+        size_hint_x: .1
+        size_hint_y: .08
+        input_type: "number"
+        focus: True
+        on_text: second.focus=True
+        text_color: app.black
+        background_color: app.grey
+        icon_color: app.grey2
+
+    MyInput:
+        id: second
+        pos_hint: {'center_x': 0.4,'center_y': 0.49}
+        # auto_focus: True
+        hint_text: "0"
+        size_hint_x: .1
+        size_hint_y: .08
+        input_type: "number"
+        on_text: third.focus=True
+        text_color: app.black
+        background_color: app.grey
+        icon_color: app.grey2
+    MyInput:
+        id: third
+        pos_hint: {'center_x': 0.55,'center_y': 0.49}
+        # auto_focus: True
+        hint_text: "0"
+        size_hint_x: .1
+        size_hint_y: .08
+        input_type: "number"
+        on_text: fourth.focus=True
+        text_color: app.black
+        background_color: app.grey
+        icon_color: app.grey2
+    MyInput:
+        id: fourth
+        pos_hint: {'center_x': 0.7,'center_y': 0.49}
+        # auto_focus: True
+        hint_text: "0"
+        size_hint_x: .1
+        size_hint_y: .08
+        input_type: "number"
+        text_color: app.black
+        background_color: app.grey
+        icon_color: app.grey2
+        on_text:
+            root.validate_otp(first.text  + second.text + third.text  + fourth.text)
+            app.change_screen("update") if root.validate_otp(first.text  + second.text + third.text\
+            + fourth.text) == "correct" else "correct"
+
+
+    Text:
+        id:otp_lbl
+        pos_hint: {"y": .9}
+
+    Text:
+        id:timer
+        # text: "30 secs"
+        font_size: app.fonts.size.h1 + dp(15)
+        font_name: app.fonts.heading
+        pos_hint: { 'y': .3}
+        halign: "center"
+        text_color: app.danger
+        # size_hint_x: .9
+        # halign: "center"
+        shorten: False
+    Text:
+        text: "Otp will expire after"
+        font_size: app.fonts.size.h4
+        font_name: app.fonts.heading
+        pos_hint: { 'y': .364}
+        halign: "center"
+        text_color: app.danger
+        # size_hint_x: .9
+        # halign: "center"
+        shorten: False
+
+    RoundButton:
+        text: "Proceed"
+        text_color:app.secondary
+        md_bg_color: app.white
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h3
+        size_hint_y: .07
+        pos_hint: {'center_x': 0.5,'center_y': 0.35}
+        on_press:
+            # root.validate_otp(first.text  + second.text + third.text  + fourth.text)
+            app.change_screen("update") if root.validate_otp(first.text  + second.text + third.text\
+            + fourth.text) == "correct" else "correct"
+    FlatButton:
+        id: resend_btn
+        text: "Resend Otp"
+        text_color:app.secondary
+        md_bg_color: app.white
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h3
+        size_hint_y: .07
+        pos_hint: {'center_x': 0.5,'center_y': 0.2}
+        on_press: asynckivy.start(app.resend_otp())
+    IconButton:
+        icon: "arrow-left"
+        pos_hint: {'center_x': 0.101,'center_y': 0.94}
+        icon_color:app.text_color
+        icon_size: app.fonts.size.icon
+        # md_bg_color:app.secondary
+        on_press:
+            app.change_screen("forgot")
+            first.text = ""
+            second.text = ""
+            third.text = ""
+            fourth.text = ""
+            # timer.text = ""
+
+

@@ -1,0 +1,94 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import RoundButton widgets.button.RoundButton
+# : import RoundImage widgets.img.RoundImage
+# : import notify widgets.notify.Notify
+
+<LoginScreen>
+    Text:
+        text: "Good to see you!"
+        font_size: app.fonts.size.h1 + dp(5)
+        font_name: app.fonts.heading
+        pos_hint: {'x': 0.12,'center_y': 0.79}
+        text_color: app.text_color
+    MDFloatLayout:
+        md_bg_color: app.secondary
+        size_hint_y: .6
+        radius: [40,40,0,0]
+    MyTextField:
+        id: email
+        hint_text: "email"
+        pos_hint: {'center_x': 0.5,'center_y': 0.39}
+        icon_right: "email"
+        input_type: "mail"
+    MyTextField:
+        id: password
+        hint_text: "password"
+        pos_hint: {'center_x': 0.5,'center_y': 0.29}
+        icon_right: "lock"
+        password: True
+        input_type: "text"
+    IconButton:
+        icon: "eye"
+        pos_hint: {'center_x': 0.78,'center_y': 0.29}
+        on_press:
+            password.password = False if password.password == True else True
+            self.icon = "eye" if password.password == True else "eye-off"
+    MDCheckbox:
+        id: check
+        size_hint: None, None
+        size: dp(1), dp(1)
+        # pos_hint: {'center_x': .001, 'center_y': .4}
+        active: False
+    RoundButton:
+        id: btn
+        text: "Proceed"
+        md_bg_color:"#ffffff"
+        text_color: app.secondary
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h3
+        size_hint_y: .07
+        pos_hint: {'center_x': 0.5,'center_y': 0.15}
+        on_press:
+            app.login_loader(email.text, password.text)
+            # app.login(email.text, password.text)
+
+
+            # app.change_screen("home")
+    FlatButton:
+        text: "[u]Recover Password[/u]"
+        pos_hint: {'center_x': 0.76,'center_y': 0.05}
+        text_color:app.secondary
+        md_bg_color: app.white
+        font_size: app.fonts.size.h5
+        on_press: app.change_screen("forgot")
+    FlatButton:
+        text: "[u]Signup instead[/u]"
+        pos_hint: {'center_x': 0.25,'center_y': 0.7}
+        md_bg_color:app.secondary
+        text_color: app.white
+        font_size: app.fonts.size.h5
+        on_press: app.change_screen("signup")
+
+    # Circle:
+    #     md_bg_color: app.orange
+    #     size: "110dp", "110dp"
+    #     pos_hint: {'center_x': 0.15,'center_y': 0.99}
+
+    # Circle:
+    #     md_bg_color: app.textfield_text
+    #     size: "130dp", "130dp"
+    #     pos_hint: {'center_x': 0.85,'center_y': 0.99}
+    # Circle:
+    #     md_bg_color: app.secondary
+    #     size: "200dp", "200dp"
+    #     pos_hint: {'center_x': 0.5,'center_y': 0.99}
+    # # MDIcon:
+    #     icon: "cash-multiple"
+    #     font_size: "100dp"
+    #     text_color: "yellow"
+    #     theme_text_color: "Custom"
+    #     pos_hint: {'center_x': 0.45,'center_y': 0.59}

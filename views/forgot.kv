@@ -1,0 +1,58 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import RoundButton widgets.button.RoundButton
+# : import RoundImage widgets.img.RoundImage
+
+<ForgotScreen>
+    Text:
+        text: "Recover your password"
+        font_size: app.fonts.size.h3
+        font_name: app.fonts.heading
+        pos_hint: {'x': 0.192,'center_y': 0.79}
+        text_color: app.text_color
+    Text:
+        text:
+            "Enter your registered email in the space provided below." \
+            "A recovery pin will be sent to the email address"
+        font_size: app.fonts.size.h5
+        font_name: app.fonts.heading
+        pos_hint: {'x':.07,'center_y': 0.69}
+        text_color: app.orange
+        size_hint_x: .9
+        halign: "center"
+        shorten: False
+    MDFloatLayout:
+        md_bg_color: app.secondary
+        size_hint_y: .6
+        radius: [40,40,0,0]
+
+    MyTextField:
+        id: email
+        hint_text: "email"
+        pos_hint: {'center_x': 0.5,'center_y': 0.49}
+        icon_right: "email"
+        input_type: "mail"
+
+
+    RoundButton:
+        id: btn
+        text: "Proceed"
+        text_color:app.secondary
+        md_bg_color: app.white
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h3
+        size_hint_y: .07
+        pos_hint: {'center_x': 0.5,'center_y': 0.35}
+        on_press:
+            app.otp_loader(email.text)
+            # root.generate_otp()
+    IconButton:
+        icon: "arrow-left"
+        pos_hint: {'top':1}
+        icon_color:app.text_color
+        icon_size: app.fonts.size.icon
+        # md_bg_color:app.secondary
+        on_press: app.change_screen("login")

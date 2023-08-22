@@ -1,0 +1,6 @@
+Money watch app helps you keep track of all your expenses and helps you stick to your budget.
+
+Your monthly income is entered and all your expenses are recorded. If you have spent an amount of money almost equal to your monthly income, Money watch informs you so that you can make some necessary changes to your spending.
+
+
+Money watch v1.0.5

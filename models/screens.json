@@ -1,0 +1,57 @@
+{
+    "login": {
+        "import": "from controllers.login import LoginScreen",
+        "object": "LoginScreen()",
+        "kv": "views/login.kv"
+    },
+    "splash": {
+        "import": "from controllers.splash import SplashScreen",
+        "object": "SplashScreen()",
+        "kv": "views/splash.kv"
+    },
+    "updateapp": {
+        "import": "from controllers.updateapp import UpdateAppScreen",
+        "object": "UpdateAppScreen()",
+        "kv": "views/updateapp.kv"
+    },
+    "home": {
+        "import": "from controllers.home import HomeScreen",
+        "object": "HomeScreen()",
+        "kv": "views/home.kv"
+    },
+    "add_expense": {
+        "import": "from controllers.add_expense import AddExpenseScreen",
+        "object": "AddExpenseScreen()",
+        "kv": "views/add_expense.kv"
+    },
+    "budget": {
+        "import": "from controllers.budget import BudgetScreen",
+        "object": "BudgetScreen()",
+        "kv": "views/budget.kv"
+    },
+    "forgot": {
+        "import": "from controllers.forgot import ForgotScreen",
+        "object": "ForgotScreen()",
+        "kv": "views/forgot.kv"
+    },
+    "otp": {
+        "import": "from controllers.otp import OtpScreen",
+        "object": "OtpScreen()",
+        "kv": "views/otp.kv"
+    },
+    "update": {
+        "import": "from controllers.update import UpdateScreen",
+        "object": "UpdateScreen()",
+        "kv": "views/update.kv"
+    },
+    "expenses": {
+        "import": "from controllers.expenses import ExpensesScreen",
+        "object": "ExpensesScreen()",
+        "kv": "views/expenses.kv"
+    },
+    "signup": {
+        "import": "from controllers.signup import SignupScreen",
+        "object": "SignupScreen()",
+        "kv": "views/signup.kv"
+    }
+}

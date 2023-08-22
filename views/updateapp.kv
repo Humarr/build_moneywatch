@@ -1,0 +1,45 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import RoundButton widgets.button.RoundButton
+# : import RoundImage widgets.img.RoundImage
+
+<UpdateAppScreen>
+    # md_bg_color: app.secondary
+    Text:
+        text: "A New Version of MoneyWatch is available"
+        font_size: app.fonts.size.h2
+        font_name: app.fonts.heading
+        halign: "center"
+        size_hint_x:.7
+        pos_hint: {'center_y': 0.79}
+        text_color: app.text_color
+        shorten: False
+    Text:
+        text:
+            "You can get it with a click of the button\n"\
+            "Alternatively, you can download it via your email. It has been delivered already."
+        halign: "center"
+        font_size: app.fonts.size.h5
+        font_name: app.fonts.heading
+        pos_hint: {'center_y': 0.69}
+        text_color: app.text_color
+        size_hint_x: .7
+        halign: "center"
+        shorten: False
+    FlatButton:
+        text: "[u]Download Now[/u]"
+        pos_hint: {'center_x': 0.5,'center_y': 0.3}
+        md_bg_color:app.secondary
+        font_size: app.fonts.size.h3
+        text_color:app.icon_color
+        # on_press: app.change_screen("login")
+    IconButton:
+        icon: "close"
+        pos_hint: {'top':1}
+        icon_color:app.text_color
+        icon_size: app.fonts.size.icon
+        # md_bg_color:app.secondary
+        on_press: app.change_screen("login")

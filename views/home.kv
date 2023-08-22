@@ -1,0 +1,444 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+#: import RoundButton widgets.button.RoundButton
+#: import RectangleButton widgets.button.RoundButton
+#: import asynckivy asynckivy
+# : import RoundImage widgets.img.RoundImage
+<ContentCustomSheet@BoxLayout>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: "400dp"
+
+<UpdateBudgetContent>
+    id: budget_content
+    # orientation: "vertical"
+    # spacing: "5dp"
+    size_hint_y: None
+    height: "400dp"
+    # md_bg_color: app.white if app.get_theme() == "light" else "#333333"
+    Text:
+        text:
+            "Enter your New budget in the space provided below.\n" \
+            "[b][color=#b90000]NOTE:[/color][/b] Your previous budget will be replaced with the new one.\n"
+        font_size: app.fonts.size.h5
+        font_name: app.fonts.heading
+        pos_hint: {'center_x':.5,'center_y': 0.8}
+        text_color: app.text_color
+        # size_hint_x: .9
+        # halign: "center"
+        shorten: False
+        size_hint_x: .7
+        halign: "center"
+    MyTextField:
+        id: new_budget
+        hint_text: "New Budget"
+        line_color_focus: app.text_color
+        line_color_normal: app.text_color
+        hint_text_color_focus: app.text_color
+        hint_text_color_normal: app.text_color
+        text_color_focus: app.text_color
+        text_color_normal: app.text_color
+        size_hint_x: .8
+        active_line: True
+        mode: "line"
+        pos_hint: {'center_x':.5,'center_y': 0.5}
+    RectangleButton:
+        text: "Proceed"
+        text_color: app.text_color
+        line_color: app.text_color
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h5
+        pos_hint: {'center_x':.5,'center_y': 0.2}
+        size_hint_y: .08
+        on_press:
+            asynckivy.start(app.rewrite_budget(new_budget.text))
+    IconButton:
+        icon: "close"
+        pos_hint: {'center_x':.5,'center_y': 0.08}
+        icon_size: app.fonts.size.icon
+        icon_color: app.warning
+        on_press: app.close(budget_content)
+        # size_hint_y: .07
+        # pos_hint: {'center_x': 0.5,'center_y': 0.35}
+        # on_press: root.save_budget(budget.text)
+
+
+
+
+
+<Item>
+
+<CircularProgressBar>
+    canvas.before:
+        Color:
+            rgba: root.bar_color_bg
+        Line:
+            width: 12
+            ellipse: (self.x, self.y, self.width, self.height, 0, 360)
+    canvas.after:
+        Color:
+            rgb: root.bar_color
+            # rgb: root.bar_color if percentage.text[0] > 0 else root.bar_color
+        Line:
+            width: 12
+            ellipse: (self.x, self.y, self.width, self.height, 0 ,root.set_value * 3.6)
+    size_hint: None, None
+    size: "100dp", "100dp"
+    pos_hint: {'center_x': 0.25,'center_y': 0.63}
+
+    # Text:
+    #     # id: percentag
+    #     text:root.percentage
+    #     pos_hint: {'center_x': .0,'center_y': .3}
+    #     text_color: app.secondary
+    #     font_name: app.fonts.heading
+    #     font_size:app.fonts.size.h1
+
+<ExpenseList>
+    id: expense_list
+    # md_bg_color: app.white if app.get_theme() == "light" else "#333333"
+    # elevation: 3
+    size_hint_y:.05
+    radius: [20]
+    text: root.amount
+    secondary_text: root.category + ": " + root.item.title()
+    tertiary_text: root.date
+    font_style: "H6"
+    theme_text_color: "Custom"
+    text_color: app.warning
+    secondary_font_style: "Body1"
+    secondary_theme_text_color: "Custom"
+    secondary_text_color: app.text_color
+    tertiary_font_style: "Caption"
+    tertiary_theme_text_color: "Custom"
+    tertiary_text_color: app.text_color
+    on_press: app.show_in_dialog(expense_list.tertiary_text, expense_list.secondary_text, expense_list.text)
+
+    # tertiary_text_color: app.warning
+    font_name: app.fonts.heading
+    # _no_ripple_effect: True
+    # _font_size: "20sp"
+    # _height: "120dp"
+    IconLeftWidgetWithoutTouch:
+        icon: root.icon
+        # icon: "food"
+        theme_icon_color: "Custom"
+        icon_color: app.text_color
+    IconRightWidget:
+        # id: percentag
+        icon:"delete"
+        theme_icon_color: "Custom"
+        # pos_hint: {'center_x': .95,'center_y': .55}
+        icon_color: app.warning
+        # size_hint_x: .5
+        # font_name: app.fonts.heading
+        # font_size:app.fonts.size.h5
+        on_press:
+            # root.delete_expense()
+            app.ask_delete(expense_list, expense_list.tertiary_text, expense_list.secondary_text, expense_list.text)
+
+
+
+
+
+
+<HomeScreen>
+    MDFloatLayout:
+        size_hint_y: .2
+        md_bg_color: app.secondary
+        pos_hint: {'top': 1.0}
+
+        IconButton:
+            icon: "information"
+            pos_hint: {'top': 1.0, 'right': 1.0}
+            icon_size: app.fonts.size.icon
+            icon_color: app.white
+            on_press: root.info()
+        Text:
+            id: greeting
+            text:"Morning, Umar"
+            pos_hint: {'center_x': 0.55,'top': 1.0}
+            text_color: app.white
+            font_name: app.fonts.heading
+            font_size:app.fonts.size.h1
+
+    Text:
+        # id: greeting
+        text:"Dashboard"
+        pos_hint: {'center_x': 0.52,'center_y': 0.76}
+        text_color: app.text_color
+        font_name: app.fonts.heading
+        font_size:app.fonts.size.h3
+    CircularProgressBar:
+        id: limit_bar
+        bar_color_bg: app.grey
+        # bar_color: app.success
+        # opacity: 0.6
+
+    Text:
+        id: percentage
+        # text:"5%"
+        pos_hint: {'center_x': .68,'center_y': .63}
+        text_color: app.text_color
+        font_name: app.fonts.heading
+        font_size:app.fonts.size.h1
+
+    Text:
+        # id: greeting
+        text:"Spent"
+        pos_hint: {'center_x': 0.72,'center_y': 0.65}
+        text_color: app.text_color
+        size_hint_x: .5
+        shorten: False
+        font_name: app.fonts.heading
+        font_size:app.fonts.size.h3
+    Text:
+        id: amount
+        text:"#XXXX.XX"
+        pos_hint: {'center_x': 0.72,'center_y': 0.6}
+        text_color: app.danger
+        size_hint_x: .5
+        shorten: False
+        font_name: app.fonts.heading
+        font_size:app.fonts.size.h3
+    Text:
+        id: month_year
+        text:"Jan. 2023"
+        pos_hint: {'center_x': 0.72,'center_y': 0.56}
+        text_color: app.text_color
+        size_hint_x: .5
+        shorten: False
+        font_name: app.fonts.heading
+        font_size:app.fonts.size.h6
+
+    MDFloatingActionButton:
+        icon: "plus"
+        pos_hint: {'center_x': 0.8,'center_y': 0.8}
+        icon_color: app.secondary
+        icon_size: "45sp"
+        md_bg_color: app.white
+        size_hint_x: .2
+        size_hint_y: .12
+        on_press: app.change_screen("add_expense")
+        # elevation: 20
+    FlatButton:
+        text: "See All"
+        pos_hint: {'center_x': 0.8,'center_y': 0.48}
+        text_color: app.white if app.get_theme() == "white" else app.secondary
+        md_bg_color: app.secondary if app.get_theme() == "white" else "white"
+        font_name: app.fonts.heading
+        # md_bg_color: app.white
+        size_hint_x: .3
+        on_press: app.show_all_expenses_loader()
+    IconButton:
+        icon: "eye"
+        pos_hint: {'center_x': 0.75,'center_y': 0.65}
+        icon_color: app.danger
+        on_press:
+            # app.toggle_amount(self.icon, amount.text)
+            # print(app.fetch_expenses)
+            amount.text = f"{str(app.toggle_amount())} NGN" if amount.text == "XXXX.XX NGN" else "XXXX.XX NGN"
+            self.icon = "eye" if amount.text == "XXXX.XX NGN" else "eye-off"
+
+
+    MDFloatLayout:
+        size_hint_y: .2
+        # md_bg_color: app.white
+        pos_hint: {'top': .49}
+        size_hint_y: .5
+        radius: [20,20,0,0]
+        Text:
+            # id: greeting
+            text:"Recent Expenses"
+            pos_hint: {'center_x': 0.52,'center_y': 0.99}
+            text_color: app.text_color
+            font_name: app.fonts.heading
+            font_size:app.fonts.size.h3
+        MDSpinner:
+            id: spinner
+            color: app.text_color
+            # palette:  [app.white, app.yellow, app.secondary]
+            determinate: False
+            size_hint: None, None
+            size: "200dp", "200dp"
+            active: False
+            line_width: "3dp"
+            pos_hint: {'center_x': .5, 'center_y': .5}
+        # MDBoxLayout:
+        #     pos_hint: {"center_y": .32}
+        #     size_hint_y: None
+        #     height: "420dp"
+            # md_bg_color: app.black
+            # adaptive_height: True
+        MDScrollView:
+            id: scroll_view
+            do_scroll_y: True
+            do_scroll_x: False
+            size_hint_y: .85
+            pos_hint: {'center_x': 0.5,'center_y':.5}
+            bar_width: 2
+            # md_bg_color: app.primary
+
+            # MDSelectionList:
+            #     size_hint_y: scroll_view.height
+                # padding: "24dp", 0, "24dp", "24dp"
+            GridLayout:
+                # bg_color: app.primary
+                id: expense_container
+                cols: 1
+                height: self.minimum_height
+                row_default_height:'90dp'
+                size_hint_y: None
+                padding: '15dp','10dp'
+                spacing: '15dp','10dp'
+
+
+
+    Navigator:
+
+
+<Navigator@MDNavigationLayout>:
+
+    MDScreenManager:
+
+        MDScreen:
+
+
+            IconButton:
+                icon:"menu"
+                icon_color: app.white
+                icon_size: app.fonts.size.icon
+                pos_hint: {"top": .99}
+                on_press: nav_drawer.set_state("open")
+    MDNavigationDrawer:
+        id: nav_drawer
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            # MDNavigationDrawerHeader:
+            #     title: "Header"
+            #     title_color: "#4a4939"
+            #     text: " text"
+            #     spacing: "4dp"
+            #     padding: "12dp", 0, 0, "56dp"
+
+            # MDNavigationDrawerLabel:
+            #     text: "Account"
+
+            # DrawerClickableItem:
+            #     icon: "account"
+            #     right_text: "+99"
+            #     text_right_color: "#4a4939"
+            #     text: "Profile"
+
+            # # MDNavigationDrawerLabel:
+            # #     text: "Settings"
+
+            DrawerClickableItem:
+                id: theme_changer
+                icon: "lightbulb-night"
+                right_text: "Dark" if app.get_theme() == "dark"  else "Light"
+                text_right_color: "#4a4939"
+                text: "Theme"
+                on_press:
+                    # app.change_theme(self.right_text)
+                    app.switch_theme_style()
+                    nav_drawer.set_state("closed")
+                    self.right_text = "Dark" if app.get_theme() == "dark"  else "Light"
+                    self.icon = "lightbulb-night" if app.get_theme() == "dark"  else "lightbulb"
+                    # self.icon = "lightbulb-night"  if app.get_theme() == "dark" else "lightbulb"
+                    # self.text_right_color = "black" if app.get_theme() == "dark"  else "orange"
+                    # expense_list.md_bg_color = app.white if app.get_theme() == "light" else "#333333"
+
+
+            MDNavigationDrawerDivider:
+
+            # MDNavigationDrawerLabel:
+            #     text: "Budegt"
+            # DrawerClickableItem:
+            #     icon: "cash"
+            #     # right_text: "+99"
+            #     text_right_color: "#4a4939"
+            #     text: "Allocate Budget"
+            #     on_release: app.show_budget_bottomsheet()
+            DrawerClickableItem:
+                icon: "magnify"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Search Expenses"
+                on_release:
+                    app.change_screen("expenses")
+                    nav_drawer.set_state("closed")
+            DrawerClickableItem:
+                icon: "cash-plus"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "Update Budget"
+                on_release:
+                    app.update_dialog()
+                    # TODO: Bottomsheet should be used instead of a dialog
+                    # app.show_custom_bottom_sheet()
+                    budget.right_text = ""
+                    budget.text = "Refresh Budget"
+                    nav_drawer.set_state("closed")
+
+            MDNavigationDrawerDivider:
+            MDNavigationDrawerLabel:
+                text: "This Month Budget"
+                text_color: "#4a4939"
+            DrawerLabelItem:
+                id: budget
+                icon: "cash-multiple"
+                right_text: str(app.fetch_budget()) + " NGN"
+                text_right_color: "#4a4939"
+                text: "Budget: "
+                on_release:
+                    self.text = "Budget: "
+                    self.right_text = str(app.fetch_budget()).strip() + " NGN"
+                    
+            MDNavigationDrawerDivider:
+            MDNavigationDrawerLabel:
+                text: "Other"
+                text_color: "#4a4939"
+            DrawerClickableItem:
+                icon: "logout"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "logout"
+                on_press: app.logout()
+            DrawerClickableItem:
+                icon: "close"
+                # right_text: "+99"
+                text_right_color: "#4a4939"
+                text: "exit"
+                on_press:
+                    app.exit_popup()
+                    nav_drawer.set_state("closed")
+
+
+            # DrawerLabelItem:
+            #     icon: "information-outline"
+            #     text: "Label"
+
+            # DrawerLabelItem:
+            #     icon: "information-outline"
+            #     text: "Label"
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: "#e7e4c0"
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    ripple_color: "#c5bdd2"
+    selected_color: "#0c6c4d"
+
+
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True

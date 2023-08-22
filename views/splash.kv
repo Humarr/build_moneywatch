@@ -1,0 +1,31 @@
+#: import Text widgets.label.Text
+#: import Circle widgets.circles.Circle
+#: import MyTextField widgets.field.MyTextField
+#: import IconButton widgets.button.IconButton
+#: import FlatButton widgets.button.FlatButton
+# : import RoundImage widgets.img.RoundImage
+
+<SplashScreen>
+    md_bg_color: app.secondary
+    Text:
+        text: "Money Watch"
+        font_name: app.fonts.heading
+        font_size: app.fonts.size.h2
+        text_color: app.text_color
+        halign: "center"
+    MDSpinner:
+        color: app.text_color
+        palette:  [app.white, app.yellow, app.orange]
+        determinate: False
+        size_hint: None, None
+        size: "200dp", "200dp"
+        line_width: "3dp"
+        pos_hint: {'center_x': .5, 'center_y': .5}
+
+
+    # Circle:
+    #     md_bg_color: app.yellow
+    #     pos_hint: {'center_x': 0.0,'center_y': 0.0}
+    # Circle:
+    #     md_bg_color: app.yellow
+    #     # pos_hint: {'x': .79,'top': 1}
