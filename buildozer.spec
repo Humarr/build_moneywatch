@@ -38,7 +38,7 @@ version = 0.1
 # comma separated e.g. requirements = sqlite3,kivy
 # requirements = python3,chardet,certifi,httplib2,https://github.com/kivymd/KivyMD/archive/master.zip, urllib3,requests,simplejson,openssl, charset_normalizer,idna,protobuf,oauth2client,pillow,sqlite3,https://github.com/kivy/plyer/archive/refs/heads/master.zip,jwt,python-for-android,jnius,sh,colorama,jinja2,MarkupSafe,zipp,pytoml, openssl, chardet, idna, jwt, cryptography, pyparsing,kvdroid, firebase_admin, google-auth, cachetools, pyasn1, pyasn1_modules, rsa, google-api-python-client, google-cloud-storage, google-cloud-firestore, google-api-core,cachecontrol, gcloud, google-cloud,sdl2_ttf == 2.0.15
 
-requirements = python3, kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, sqlite3, simplejson, premailer, cssselect, cachetools, lxml, certifi, charset_normalizer, yagmail, cssutils, chardet, requests, idna, gcloud, googleapis-common-protos, protobuf, httplib2, pyparsing, oauth2client, pyasn1, pyasn1-modules, rsa, six, pycryptodome, python-jwt,jwcrypto, cryptography, cffi, deprecated, wrapt, requests-toolbelt==0.10.1 ,chardet, asynckivy, asyncgui, plyer
+requirements = python3.10.5, kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, sqlite3, simplejson, premailer, cssselect, cachetools, lxml, certifi, charset_normalizer, yagmail, cssutils, chardet, requests, idna, gcloud, googleapis-common-protos, protobuf, httplib2, pyparsing, oauth2client, pyasn1, pyasn1-modules, rsa, six, pycryptodome, python-jwt,jwcrypto, cryptography, cffi, deprecated, wrapt, requests-toolbelt==0.10.1 ,chardet, asynckivy, asyncgui, plyer
 #  python-for-android==2023.2.10
 # pyjnius==1.4.2, cffi==1.15.0
 # ,yagmail,premailer,cssutils,lxml
@@ -72,10 +72,10 @@ orientation = portrait
 # author = © Copyright Info
 
 # change the major version of python used by the app
-osx.python_version = 3
+osx.python_version = 3.10.5
 
 # Kivy version to use
-osx.kivy_version = 1.9.1
+osx.kivy_version = 2.1.1
 
 #
 # Android specific
