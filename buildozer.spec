@@ -11,7 +11,7 @@ package.domain = com.owo
 
 # (str) Source code where the main.py live
 source.dir = .
-
+android.release_artifact = apk
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,ttf,ico,json,txt,db
 
@@ -96,7 +96,7 @@ android.presplash_color = #556b2f
 android.permissions = INTERNET,ACCESS_NOTIFICATIONS, READ_EXTERNAL_STORAGE
 
 # (int) Target Android API, should be as high as possible.
-android.api = 30
+android.api = 33
 
 # (int) Minimum API your APK will support.
 #android.minapi = 21
